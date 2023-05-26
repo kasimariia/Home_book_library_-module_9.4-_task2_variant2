@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Email Form With Flask WTF</title>
+</head>
+<body>
+
+{% if error %}
+<div>{{ error }}</div>
+{% endif %}
+
+<form method="POST" action="/login/">
+  {{ form.csrf_token }}
+  <table>
+    <tr>
+      <th>{{ form.email.label }}</th>
+      <td>{{ form.email }}</td>
+    </tr>
+    <tr>
+      <th>{{ form.password.label }}</th>
+      <td>{{ form.password }}</td>
+    </tr>
+  </table>
+  <input type="submit" value="Go">
+</form>
+
+</body>
+</html>

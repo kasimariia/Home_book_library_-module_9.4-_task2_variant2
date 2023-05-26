@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>My Library</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1>My Library</h1>
+
+    <h2>Library:</h2>
+    <ul>
+    {% for todo in todos %}
+        <li>{{ todo.title }} - {{ todo.author }} - {{ todo.year }}</li>
+        <form method="POST" action="{{ url_for('delete_todo', todo_id=todo.id) }}" style="display:inline;">
+            {{ form.csrf_token }}
+            <input type="hidden" name="_method" value="DELETE">
+            <button type="submit" class="delete-button">Delete</button>
+        </form>
+    {% endfor %}
+    </ul>
+
+    <h2>Add a New Book:</h2>
+    <form method="POST">
+        {{ form.hidden_tag() }}
+
+        <p>
+            {{ form.title.label }}<br>
+            {{ form.title(size=30) }}
+            {% if form.title.errors %}
+                <span>{{ form.title.errors[0] }}</span>
+            {% endif %}
+        </p>
+
+        <p>
+            {{ form.author.label }}<br>
+            {{ form.author(size=30) }}
+            {% if form.author.errors %}
+                <span>{{ form.author.errors[0] }}</span>
+            {% endif %}
+        </p>
+
+        <p>
+            {{ form.year.label }}<br>
+            {{ form.year(size=30) }}
+            {% if form.year.errors %}
+                <span >{{ form.year.errors[0] }}</span>
+            {% endif %}
+        </p>
+
+        <p>
+            {{ form.pages.label }}<br>
+            {{ form.pages(size=30) }}
+            {% if form.pages.errors %}
+                <span>{{ form.pages.errors[0] }}</span>
+            {% endif %}
+        </p>
+
+        <p>
+            <input type="submit" value="Add Book">
+        </p>
+    </form>
+
+    {% if error %}
+        <p>{{ error }}</p>
+    {% endif %}
+</body>
+</html>
