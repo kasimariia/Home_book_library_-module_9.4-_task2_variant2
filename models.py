@@ -12,11 +12,11 @@ class Todos:
         return self.todos
 
     def get(self, id):
-        return self.todos[id - 1]  # Змінено індексацію для відповідності списку зі списком в HTML шаблоні
+        return self.todos[id - 1]  # тут змінила індексацію для відповідності списку зі списком в HTML шаблоні
 
     def create(self, data):
-        data["id"] = len(self.todos) + 1  # Генеруємо новий ID
-        data["done"] = False  # Додаємо значення для done
+        data["id"] = len(self.todos) + 1  # створимо новий id
+        data["done"] = False  # треба додати значення для done
         self.todos.append(data)
         self.save_all()
 
@@ -25,10 +25,10 @@ class Todos:
             json.dump({"library": self.todos}, f)
 
     def update(self, id, data):
-        self.todos[id - 1] = data  # Змінено індексацію для відповідності списку зі списком в HTML шаблоні
+        self.todos[id - 1] = data  # для зміни індексації для відповідності списку зі списком в HTML шаблоні
         self.save_all()
 
-    def delete(self, id):
+    def delete(self, id):  #для видалення книги
         todo = self.get(id)
         if todo:
             self.todos.remove(todo)
